@@ -8,7 +8,7 @@ Module de fumée pour circuits MicroCoaster. Un ESP32 commute par MOSFET une mac
 
 **Version 0.1.0-alpha**
 
-## Principe
+<img src="docs/sections/s01.png" alt="01 Principe" width="100%">
 
 La logique tient en deux états. Le module est prêt, on lui demande de fumer pendant N secondes, il fume, il revient prêt. Rien d'autre.
 
@@ -22,13 +22,13 @@ SMOKING    fumée en cours pour la durée demandée
 
 Ce choix est délibéré : deux composants qui décident chacun de leur côté quand la fumée peut repartir finissent toujours par se contredire. Une seule autorité, le contrôleur.
 
-## Sécurité
+<img src="docs/sections/s02.png" alt="02 Sécurité" width="100%">
 
 `HEATER_MAX_ON_MS` borne la durée d'un cycle à 15 secondes. C'est la seule protection locale, et elle est indispensable : une résistance laissée sous tension sur un ordre perdu ou une liaison coupée chauffe sans limite.
 
 Le MOSFET doit être dimensionné pour le courant réel de la machine, et sa dissipation thermique vérifiée. Une masse commune entre l'ESP32, le MOSFET et les deux alimentations est obligatoire, sans quoi la commande de grille n'a pas de référence.
 
-## Matériel
+<img src="docs/sections/s03.png" alt="03 Matériel" width="100%">
 
 | Élément | Broche | Rôle |
 |:--|:--|:--|
@@ -43,16 +43,9 @@ GPIO 18 ───────────── Grille
                       Source ──────────────── Masse commune
 ```
 
-## Configuration
+Dans `include/config.h` : `PIN_HEATER` fixe la broche de commande, `HEATER_MAX_ON_MS` la durée maximale d'un cycle.
 
-Dans `include/config.h` :
-
-| Paramètre | Rôle |
-|:--|:--|
-| `PIN_HEATER` | Broche de commande, GPIO 18 par défaut |
-| `HEATER_MAX_ON_MS` | Durée maximale d'un cycle, 15000 ms |
-
-## Commandes
+<img src="docs/sections/s04.png" alt="04 Protocole" width="100%">
 
 **Console série**, à 115200 bauds :
 
@@ -77,7 +70,7 @@ Réponses :
 { "ok": true, "state": "SMOKING", "remaining_ms": 9800 }
 ```
 
-## Compiler et téléverser
+<img src="docs/sections/s05.png" alt="05 Mise en service" width="100%">
 
 Nécessite [PlatformIO](https://platformio.org/) dans Visual Studio Code.
 
@@ -87,10 +80,12 @@ pio run -t upload        # téléversement du firmware
 pio device monitor       # console série, 115200 bauds
 ```
 
-## État
+<img src="docs/sections/s06.png" alt="06 Écosystème" width="100%">
 
-Version `0.1.0-alpha`. La spécification, le câblage et le protocole sont posés. Le firmware reste à écrire : le dépôt ne contient aujourd'hui que cette documentation, le changelog et la licence.
+La spécification, le câblage et le protocole sont posés. Le firmware reste à écrire : le dépôt ne contient aujourd'hui que cette documentation, le changelog et la licence.
+
+Le socle commun à tous les modules est le [WiFi Manager](https://github.com/Microcoaster/MicroCoaster_WifiManager), et le pilotage se fait depuis la [WebApp](https://github.com/Microcoaster/MicroCoasterWebApp).
 
 ---
 
-<sub>MicroCoaster · Auteurs : CyberSpaceRS, Yamakajump</sub>
+<sub>MicroCoaster · Auteur : Cybertrist</sub>

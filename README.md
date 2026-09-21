@@ -1,4 +1,9 @@
-# 🎢 MicroCoaster - Module Smoke Machine (ESP32)
+<div align="center">
+
+<img src="docs/banniere.png" alt="Smoke Machine, module de fumée ESP32" width="100%">
+
+</div>
+
 
 > Module de fumée pour montagnes russes miniatures avec contrôle WebSocket et logique simple par cycles (READY → SMOKING), sans cooldown local.
 

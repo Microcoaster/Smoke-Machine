@@ -34,8 +34,6 @@ La machine à fumée intègre déjà sa résistance et son ventilateur, le modul
 
 **Console série**, à 115200 bauds :
 
-<img src="docs/blocs/01.png" alt="Console série : commandes, 115200 bauds" width="100%">
-
 ```
 status          état courant, temps restant, durée maximale
 setdur 10       fixe la durée d'un cycle, en secondes
@@ -43,8 +41,6 @@ smoke           déclenche un cycle si l'état est READY
 ```
 
 **WebSocket**, en JSON :
-
-<img src="docs/blocs/02.png" alt="JSON : commandes WebSocket" width="100%">
 
 ```json
 { "cmd": "STATUS" }
@@ -54,8 +50,6 @@ smoke           déclenche un cycle si l'état est READY
 
 Réponses :
 
-<img src="docs/blocs/03.png" alt="JSON : réponses" width="100%">
-
 ```json
 { "ok": true, "state": "READY",   "duration_s": 10 }
 { "ok": true, "state": "SMOKING", "remaining_ms": 9800 }
@@ -64,8 +58,6 @@ Réponses :
 <img src="docs/sections/s05.png" alt="05 Mise en service" width="100%">
 
 Nécessite [PlatformIO](https://platformio.org/) dans Visual Studio Code.
-
-<img src="docs/blocs/04.png" alt="Terminal bash : compiler et téléverser" width="100%">
 
 ```bash
 pio run                  # compilation

@@ -1,16 +1,16 @@
 # Journal des modifications
 
-Tous les changements notables de ce projet seront documentés dans ce fichier.
+Tous les changements notables de ce projet sont consignés ici.
 
 ## [Unreleased]
 
-## [0.0.0] - 04-10-2025
+## [0.1.0-alpha] - 04-10-2025
 
-- Version initiale de la template de Microcoaster.
+- Spécification, câblage et protocole du module de fumée. Firmware à écrire.
 
 ### Ajouté
 
-- Ce fichier CHANGELOG pour suivre toute les prochaines modifications
+- Ce fichier, pour suivre les modifications à venir.
 
-[unreleased]: https://github.com/Microcoaster/Template/compare/v0.0.0...HEAD
-[0.0.0]: https://github.com/Microcoaster/Template/releases/tag/v0.0.0
+[unreleased]: https://github.com/Microcoaster/Smoke-Machine/compare/v0.1.0-alpha...HEAD
+[0.1.0-alpha]: https://github.com/Microcoaster/Smoke-Machine/releases/tag/v0.1.0-alpha

@@ -12,11 +12,7 @@ Module de fumée pour circuits MicroCoaster. Un ESP32 commute par MOSFET une mac
 
 La logique tient en deux états. Le module est prêt, on lui demande de fumer pendant N secondes, il fume, il revient prêt. Rien d'autre.
 
-```
-READY      au repos, prêt à déclencher
-SMOKING    fumée en cours pour la durée demandée
-           puis retour immédiat en READY
-```
+<img src="docs/schemas/etats.png" alt="READY : au repos, résistance hors tension, prêt à recevoir un ordre. La commande SMOKE fait passer en SMOKING : fumée en cours pour la durée demandée, puis retour immédiat au repos une fois la durée écoulée. HEATER_MAX_ON_MS coupe à 15 secondes quoi qu'il arrive." width="100%">
 
 **Aucune temporisation n'est gérée localement.** Si une cadence minimale entre deux bouffées est nécessaire, c'est au contrôleur de l'imposer. Le module obéit.
 
@@ -26,24 +22,13 @@ Ce choix est délibéré : deux composants qui décident chacun de leur côté q
 
 `HEATER_MAX_ON_MS` borne la durée d'un cycle à 15 secondes. C'est la seule protection locale, et elle est indispensable : une résistance laissée sous tension sur un ordre perdu ou une liaison coupée chauffe sans limite.
 
-Le MOSFET doit être dimensionné pour le courant réel de la machine, et sa dissipation thermique vérifiée. Une masse commune entre l'ESP32, le MOSFET et les deux alimentations est obligatoire, sans quoi la commande de grille n'a pas de référence.
+Le MOSFET doit être dimensionné pour le courant réel de la machine, et sa dissipation thermique vérifiée.
 
 <img src="docs/sections/s03.png" alt="03 Matériel" width="100%">
 
-| Élément | Broche | Rôle |
-|:--|:--|:--|
-| Grille du MOSFET | GPIO 18 | Commande tout ou rien de la machine |
+<img src="docs/schemas/cablage.png" alt="L'ESP32 DevKit décide de la durée et ne fournit aucune puissance. Sa broche GPIO 18 attaque la grille d'un MOSFET canal N, qui commute le courant réel de la machine. Le drain du MOSFET rejoint la borne négative de la machine à fumée, qui intègre sa résistance chauffante et son ventilateur. Les trois éléments partagent une masse commune, sans laquelle la commande de grille n'a pas de référence." width="100%">
 
-Le MOSFET est un canal N. La machine à fumée intègre déjà sa résistance et son ventilateur, le module ne pilote donc qu'une seule ligne.
-
-```
-ESP32 DevKit          MOSFET canal N          Machine à fumée
-GPIO 18 ───────────── Grille
-                      Drain ───────────────── Borne négative
-                      Source ──────────────── Masse commune
-```
-
-Dans `include/config.h` : `PIN_HEATER` fixe la broche de commande, `HEATER_MAX_ON_MS` la durée maximale d'un cycle.
+La machine à fumée intègre déjà sa résistance et son ventilateur, le module ne pilote donc qu'une seule ligne. Dans `include/config.h` : `PIN_HEATER` fixe la broche de commande, `HEATER_MAX_ON_MS` la durée maximale d'un cycle.
 
 <img src="docs/sections/s04.png" alt="04 Protocole" width="100%">
 

@@ -74,7 +74,7 @@ pio device monitor       # serial console, 115200 baud
 
 The specification, the wiring and the protocol are settled. The firmware is still to be written: today the repository holds only this documentation, the changelog and the licence.
 
-The common base for every module is the [WiFi Manager](https://github.com/Microcoaster/MicroCoaster_WifiManager), and the driving is done from the [WebApp](https://github.com/Microcoaster/MicroCoasterWebApp).
+The common base for every module is the [WiFi Manager](https://github.com/Microcoaster/MicroCoaster_WifiManager/blob/main/README.en.md), and the driving is done from the [WebApp](https://github.com/Microcoaster/MicroCoasterWebApp/blob/main/README.en.md).
 
 ---
 
